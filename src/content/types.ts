@@ -4,6 +4,40 @@ export interface NavItem {
   external?: boolean;
 }
 
+export interface Logo {
+  name: string;
+  image: string;
+}
+
+export interface Testimonial {
+  name: string;
+  role: string;
+  image: string;
+  rating: number;
+  quote: string;
+}
+
+export interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface ProcessStep {
+  number: string;
+  title: string;
+  description: string;
+  image: string;
+  cta?: string;
+  ctaUrl?: string;
+}
+
+export interface BlogArticle {
+  title: string;
+  image: string;
+  url: string;
+}
+
 export interface HowItWorksStep {
   number: string;
   title: string;
@@ -48,12 +82,34 @@ export interface SiteContent {
     hero: {
       title: string;
       subtitle: string;
+      description: string;
       cta: string;
+      videoUrl: string;
+    };
+    socialProof: {
+      title: string;
+      logos: Logo[];
+    };
+    testimonials: {
+      title: string;
+      items: Testimonial[];
     };
     howItWorks: {
       title: string;
+      subtitle: string;
       anchor: string;
-      steps: HowItWorksStep[];
+      features: Feature[];
+      process: {
+        heading1: string;
+        heading2: string;
+        heading3: string;
+        heading4: string;
+        steps: ProcessStep[];
+      };
+    };
+    blog: {
+      title: string;
+      articles: BlogArticle[];
     };
     faq: {
       title: string;
@@ -104,6 +160,18 @@ export interface SiteContent {
   // Footer
   footer: {
     description: string;
+    newsletter: {
+      title: string;
+      description: string;
+      firstNamePlaceholder: string;
+      firstNameLabel: string;
+      emailPlaceholder: string;
+      emailLabel: string;
+      ctaButton: string;
+    };
+    social: {
+      linkedin: string;
+    };
     links: {
       title: string;
       items: Array<{ label: string; href: string }>;
