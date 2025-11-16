@@ -2,6 +2,8 @@ import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
+import { NewsletterForm } from '@/components/forms/NewsletterForm';
 import type { Language } from '@/lib/i18n';
 import type { SiteContent } from '@/content/types';
 import { ArrowRight } from 'lucide-react';
@@ -83,6 +85,45 @@ export const Home = ({ lang, content }: HomeProps) => {
         </div>
       </section>
 
+      {/* Newsletter Section */}
+      <section className="bg-gradient-accent border-y border-border">
+        <div className="container py-20 md:py-28">
+          <div className="grid gap-12 lg:grid-cols-2 items-center max-w-5xl mx-auto">
+            <div className="space-y-6">
+              <Badge className="w-fit bg-primary text-primary-foreground">
+                {lang === 'fr' ? '📧 Newsletter exclusive' : '📧 Exclusive newsletter'}
+              </Badge>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                {lang === 'fr' ? 'La Dépêche - Newsletter SEO' : 'The Dispatch - SEO Newsletter'}
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {lang === 'fr' ? 'Recevez chaque semaine nos meilleurs conseils SEO, des études de cas exclusives et les dernières tendances en content marketing.' : 'Receive our best SEO tips, exclusive case studies and the latest content marketing trends every week.'}
+              </p>
+              <ul className="space-y-3">
+                {[lang === 'fr' ? 'Conseils SEO actionnables' : 'Actionable SEO tips', lang === 'fr' ? 'Études de cas détaillées' : 'Detailed case studies', lang === 'fr' ? 'Tendances content marketing' : 'Content marketing trends', lang === 'fr' ? 'Outils et ressources gratuites' : 'Free tools and resources'].map((benefit, index) => <li key={index} className="flex items-start gap-3">
+                    <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-primary font-bold text-sm">✓</span>
+                    </div>
+                    <span className="text-foreground">{benefit}</span>
+                  </li>)}
+              </ul>
+            </div>
+
+            <Card className="border-border shadow-xl">
+              <CardHeader>
+                <CardTitle>{lang === 'fr' ? 'Rejoignez La Dépêche' : 'Join The Dispatch'}</CardTitle>
+                <CardDescription>
+                  {lang === 'fr' ? 'Recevez nos conseils SEO directement dans votre boîte mail' : 'Get our SEO tips directly in your inbox'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <NewsletterForm lang={lang} />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="border-t border-border bg-primary py-24">
         <div className="container text-center">
@@ -90,7 +131,7 @@ export const Home = ({ lang, content }: HomeProps) => {
             {lang === 'fr' ? 'Prêt à commencer ?' : 'Ready to Get Started?'}
           </h2>
           <p className="text-lg text-primary-foreground/90 mb-8">
-            {lang === 'fr' 
+            {lang === 'fr'
               ? 'Créez du contenu SEO de qualité dès aujourd\'hui'
               : 'Create quality SEO content today'}
           </p>
