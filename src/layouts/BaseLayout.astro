@@ -1,0 +1,66 @@
+---
+import '@/index.css';
+import { HeaderAstro } from '@/components/HeaderAstro';
+import { FooterAstro } from '@/components/FooterAstro';
+import { getContent, getAlternateUrl, type Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  title: string;
+  description: string;
+  currentPath: string;
+}
+
+const { lang, title, description, currentPath } = Astro.props;
+const content = getContent(lang);
+
+const baseUrl = 'https://askingfranklin.com';
+const canonicalUrl = `${baseUrl}${currentPath}`;
+const enUrl = `${baseUrl}${getAlternateUrl(currentPath, 'en')}`;
+const frUrl = `${baseUrl}${getAlternateUrl(currentPath, 'fr')}`;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="fr" href={frUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'fr' ? 'en_US' : 'fr_FR'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <div class="flex min-h-screen flex-col">
+      <HeaderAstro lang={lang} content={content} currentPath={currentPath} client:load />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <FooterAstro content={content} client:load />
+    </div>
+  </body>
+</html>
