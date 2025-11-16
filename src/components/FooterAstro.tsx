@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
 import type { SiteContent } from '@/content/types';
 
 interface FooterProps {
   content: SiteContent;
 }
 
-export const Footer = ({ content }: FooterProps) => {
+export const FooterAstro = ({ content }: FooterProps) => {
   return (
     <footer className="border-t border-border bg-muted/50">
       <div className="container py-12">
@@ -14,7 +13,7 @@ export const Footer = ({ content }: FooterProps) => {
             <h3 className="text-lg font-bold text-primary mb-4">{content.siteName}</h3>
             <p className="text-sm text-muted-foreground">{content.footer.description}</p>
           </div>
-          
+
           {content.footer.links.map((section) => (
             <div key={section.title}>
               <h4 className="text-sm font-semibold text-foreground mb-4">{section.title}</h4>
@@ -31,12 +30,12 @@ export const Footer = ({ content }: FooterProps) => {
                         {item.label}
                       </a>
                     ) : (
-                      <Link
-                        to={item.href}
+                      <a
+                        href={item.href}
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         {item.label}
-                      </Link>
+                      </a>
                     )}
                   </li>
                 ))}
@@ -44,7 +43,7 @@ export const Footer = ({ content }: FooterProps) => {
             </div>
           ))}
         </div>
-        
+
         <div className="mt-12 pt-8 border-t border-border">
           <p className="text-sm text-center text-muted-foreground">{content.footer.copyright}</p>
         </div>
